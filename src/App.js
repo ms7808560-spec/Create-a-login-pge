@@ -1,37 +1,106 @@
-import React from 'react'
+import React, { useState } from "react";
+import styled from "styled-components";
 
-const App = () => {
-    return (
-        <div>
+function App() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: ""
+  });
 
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
 
-            <div class="container">
-                <div class="form-header">
-                    <h2>Create Account</h2>
-                </div>
-                <form action="">
-                    <div class="input-box">
-                        <label for="username">Username :</label>
-                        <input type="text" placeholder="Enter username" required />#</div>
-                    <div class="input-box" >
-                        <label for="Email">Email :</label>
-                        <input type="email" placeholder="Enter Email" required />#</div>
-                    <div class="input-box">
-                        <label for="Password">Password :</label>
-                        <input type="Password" placeholder="Enter Password" required />#</div>
-                    <div class="input-box" />
-                    <label for="Confirm Password ">Confirm Password :</label>
-                    <input type=" Confirm Password" placeholder="Enter Confirm Password" required />
-                    <div class="Alert">
-                        <p>By clicking sign up, you agree to our <a href="a">Term,</a><a href="a">Privacy Policy,</a>and </p></div>
-                    <button class="btn" type="Submit">Sign up</button>
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert("Form Submitted ✅");
+    console.log(formData);
+  };
 
-                </form>
+  return (
+    <Container>
+      <FormCard>
+        <Title>Sign Up</Title>
 
+        <Form onSubmit={handleSubmit}>
+          <Input
+            type="text"
+            name="name"
+            placeholder="Full Name"
+            onChange={handleChange}
+          />
 
-            </div>
-        </div>
-    )
+          <Input
+            type="email"
+            name="email"
+            placeholder="Email Address"
+            onChange={handleChange}
+          />
+
+          <Input
+            type="password"
+            name="password"
+            placeholder="Password"
+            onChange={handleChange}
+          />
+
+          <Button type="submit">Create Account</Button>
+        </Form>
+      </FormCard>
+    </Container>
+  );
 }
 
-export default App
+export default App;
+
+
+
+
+
+/* ===== Styled Components ===== */
+
+const Container = styled.div`
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+`;
+
+const FormCard = styled.div`
+  background: white;
+  padding: 40px;
+  border-radius: 10px;
+  width: 350px;
+  text-align: center;
+`;
+
+const Title = styled.h2`
+  margin-bottom: 20px;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Input = styled.input`
+  margin: 10px 0;
+  padding: 12px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+`;
+
+const Button = styled.button`
+  margin-top: 15px;
+  padding: 12px;
+  border: none;
+  background: #667eea;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+`;
